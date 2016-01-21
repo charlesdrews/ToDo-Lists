@@ -24,6 +24,14 @@ public class ToDoList {
         return items;
     }
 
+    public ArrayList<String> getItemTitles() {
+        ArrayList<String> itemTitles = new ArrayList<String>();
+        for (ToDoItem item : this.getItems()) {
+            itemTitles.add(item.getTitle());
+        }
+        return itemTitles;
+    }
+
     public void addItem(ToDoItem item) {
         items.add(item);
     }
