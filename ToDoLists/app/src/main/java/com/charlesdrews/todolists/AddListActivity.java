@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import static com.charlesdrews.todolists.Constants.*;
 
 public class AddListActivity extends AppCompatActivity {
 
@@ -22,33 +23,31 @@ public class AddListActivity extends AppCompatActivity {
         mCreateButton = (Button) findViewById(R.id.create_new_list_button);
         mCancelButton = (Button) findViewById(R.id.cancel_new_list_button);
 
-        View.OnClickListener createListener = new View.OnClickListener() {
+        // Create button sends data back
+        mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String listName = mInput.getText().toString();
                 if (listName.isEmpty()) {
-                    mInput.setError("Name cannot be blank");
+                    mInput.setError(BLANK_LIST_NAME_MSG);
                 } else if (ViewListsActivity.getListNames().contains(listName)) {
-                    Toast.makeText(
-                            AddListActivity.this,
-                            "There is already a list with that name. Please enter a different name.",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddListActivity.this, LIST_NAME_IN_USE_MSG, Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent createIntent = new Intent(AddListActivity.this, ViewListsActivity.class);
-                    createIntent.putExtra("NEW_LIST_NAME", listName);
-                    startActivity(createIntent);
+                    Intent intent = new Intent(AddListActivity.this, ViewListsActivity.class);
+                    intent.putExtra(NEW_LIST_NAME, listName);
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
-        };
-        mCreateButton.setOnClickListener(createListener);
+        });
 
-        View.OnClickListener cancelListener = new View.OnClickListener() {
+        // Cancel button indicates no data passed back as result
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cancelIntent = new Intent(AddListActivity.this, ViewListsActivity.class);
-                startActivity(cancelIntent);
+                setResult(RESULT_CANCELED);
+                finish();
             }
-        };
-        mCancelButton.setOnClickListener(cancelListener);
+        });
     }
 }

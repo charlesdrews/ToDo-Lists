@@ -32,6 +32,15 @@ public class ToDoList {
         return itemTitles;
     }
 
+    public ToDoItem getItemByTitle(String itemTitle) {
+        for (ToDoItem item : this.getItems()) {
+            if (item.getTitle().equals(itemTitle)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     public void addItem(ToDoItem item) {
         items.add(item);
     }
