@@ -13,7 +13,7 @@
     <TextView
         android:text="Your Lists"
         android:textStyle="bold"
-        android:textSize="30sp"
+        android:textSize="@dimen/activity_title_font_size"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

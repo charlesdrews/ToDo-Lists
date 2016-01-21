@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,7 +17,6 @@ public class ViewListsActivity extends AppCompatActivity {
     public static final ArrayList<ToDoList> mToDoLists = new ArrayList<ToDoList>();
     private ListView mListView;
     private Button mAddListButton;
-    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,15 @@ public class ViewListsActivity extends AppCompatActivity {
             mToDoLists.add(new ToDoList(newListName));
         }
 
-        // gather all existing list names
+        // gather all existing list names and populate the list view
         ArrayList<String> listNames = getListNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                ViewListsActivity.this,
+                android.R.layout.simple_list_item_1,
+                listNames);
+        mListView.setAdapter(adapter);
 
-        mAdapter = new ArrayAdapter<String>(ViewListsActivity.this, android.R.layout.simple_list_item_1, listNames);
-        mListView.setAdapter(mAdapter);
-
+        // make the "Add List" button send user to AddListActivity
         View.OnClickListener addListListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +49,17 @@ public class ViewListsActivity extends AppCompatActivity {
             }
         };
         mAddListButton.setOnClickListener(addListListener);
+
+        // make clicking the ListView send user to ViewListDetailActivity
+        AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(ViewListsActivity.this, ViewListDetailActivity.class);
+                intent.putExtra("SELECTED_LIST_NAME", ((TextView)view).getText().toString());
+                startActivity(intent);
+            }
+        };
+        mListView.setOnItemClickListener(onItemClickListener);
     }
 
     public static ArrayList<String> getListNames() {
@@ -54,4 +69,5 @@ public class ViewListsActivity extends AppCompatActivity {
         }
         return listNames;
     }
+
 }
