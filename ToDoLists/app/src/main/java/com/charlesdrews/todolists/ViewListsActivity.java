@@ -26,6 +26,7 @@ public class ViewListsActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.lists_list_view);
         mAddListButton = (Button) findViewById(R.id.add_list_button);
 
+        //TODO make this use bundle
         // check if new list name passed via intent extras
         if (getIntent().getExtras() != null) {
             String newListName = getIntent().getExtras().getString("NEW_LIST_NAME");
@@ -55,7 +56,10 @@ public class ViewListsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ViewListsActivity.this, ViewListDetailActivity.class);
-                intent.putExtra("SELECTED_LIST_NAME", ((TextView)view).getText().toString());
+                Bundle extras = new Bundle();
+                extras.putString(getString(R.string.from_activity_key), "ViewListsActivity");
+                extras.putString(getString(R.string.selected_list_key), ((TextView)view).getText().toString());
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         };

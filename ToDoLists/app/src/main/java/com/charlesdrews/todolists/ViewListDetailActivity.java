@@ -28,20 +28,31 @@ public class ViewListDetailActivity extends AppCompatActivity {
         mDeleteButton = (Button) findViewById(R.id.delete_list_button);
         mAddItemButton = (Button) findViewById(R.id.add_item_button);
 
-        if (getIntent().getExtras() == null) {
+        // check if extras included in intent - if not, go to home activity
+        Bundle extrasReceived = getIntent().getExtras();
+        if (extrasReceived == null) {
             // if list to view in detail is not specified, go back to main page
             Intent intent = new Intent(ViewListDetailActivity.this, ViewListsActivity.class);
             startActivity(intent);
             return;
         }
 
-        final String listName = getIntent().getExtras().getString("SELECTED_LIST_NAME");
+        // no matter which activity sent us here, the extras should specify the selected list
+        // get name for selected list user wants to view and populate title
+        final String listName = getIntent().getExtras().getString(getString(R.string.selected_list_key));
         mTitle.setText(listName);
         ToDoList list = getListByName(listName);
 
-        //TODO check if new item title & detail were passed via extras & add new item to list
+        // if new item info passed from AddItemActivityCreate then add item to list
+        // (as opposed to from ViewListsActivity or AddItemActivityCancel)
+        String fromActivity = extrasReceived.getString(getString(R.string.from_activity_key));
+        if (fromActivity.equals("AddItemActivityCreate")) {
+            String newItemTitle = getIntent().getExtras().getString("NEW_ITEM_TITLE");
+            String newItemDetail = getIntent().getExtras().getString("NEW_ITEM_DETAIL");
+            list.addItem(new ToDoItem(newItemTitle, newItemDetail, listName));
+        }
 
-        // populate the list view with item titles for the selected list
+        // populate list view with items for this list, now possibly including a new item
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 ViewListDetailActivity.this,
                 android.R.layout.simple_list_item_1,
@@ -58,14 +69,24 @@ public class ViewListDetailActivity extends AppCompatActivity {
         };
         mBackButton.setOnClickListener(backListener);
 
-        //TODO set listener for "delete list" button (may need "are you sure" popup)
+        // add delete list button
+        View.OnClickListener deleteListListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO set listener for "delete list" button (may need "are you sure" popup)
+
+            }
+        };
+        mDeleteButton.setOnClickListener(deleteListListener);
 
         // add item button
         View.OnClickListener addItemListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewListDetailActivity.this, AddItemActivity.class);
-                intent.putExtra("SELECTED_LIST_NAME", listName);
+                Bundle extras = new Bundle();
+                extras.putString(getString(R.string.selected_list_key), listName);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         };

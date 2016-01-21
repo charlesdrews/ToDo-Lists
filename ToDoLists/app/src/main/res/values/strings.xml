@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ToDoLists</string>
+    <string name="from_activity_key">FROM_ACTIVITY</string>
+    <string name="selected_list_key">SELECTED_LIST_NAME</string>
 </resources>

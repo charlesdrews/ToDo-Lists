@@ -26,17 +26,22 @@ public class AddItemActivity extends AppCompatActivity {
         mCancelButton = (Button) findViewById(R.id.cancel_new_item_button);
         mListName = (TextView) findViewById(R.id.add_item_list_name); //TODO make this a spinner
 
-        //TODO getExtras - should include currently selected list name
-        if (getIntent().getExtras() == null) {
+        // check if extras included in intent - if not, go to home activity
+        Bundle extrasReceived = getIntent().getExtras();
+        if (extrasReceived == null) {
             // if selected list is not specified, go back to main page
             Intent intent = new Intent(AddItemActivity.this, ViewListsActivity.class);
             startActivity(intent);
             return;
         }
-        final String listName = getIntent().getExtras().getString("SELECTED_LIST_NAME");
+
+        // no matter which activity sent us here, the extras should specify the selected list
+        // get name for selected list user wants to view and populate title //TODO make the title a spinner
+        final String listName = getIntent().getExtras().getString(getString(R.string.selected_list_key));
         mListName.setText(listName);
         final ToDoList list = ViewListDetailActivity.getListByName(listName);
 
+        // create item button
         View.OnClickListener createListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,21 +55,27 @@ public class AddItemActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Intent createIntent = new Intent(AddItemActivity.this, ViewListDetailActivity.class);
-                    //TODO maybe use a bundle and putExtras here?
-                    createIntent.putExtra("SELECTED_LIST_NAME", listName);
-                    createIntent.putExtra("NEW_ITEM_TITLE", itemTitle);
-                    createIntent.putExtra("NEW_ITEM_DETAIL", mDetailInput.getText().toString());
+                    Bundle extras = new Bundle();
+                    extras.putString(getString(R.string.from_activity_key), "AddItemActivityCreate");
+                    extras.putString(getString(R.string.selected_list_key), listName);
+                    extras.putString("NEW_ITEM_TITLE", itemTitle);
+                    extras.putString("NEW_ITEM_DETAIL", mDetailInput.getText().toString());
+                    createIntent.putExtras(extras);
                     startActivity(createIntent);
                 }
             }
         };
         mCreateButton.setOnClickListener(createListener);
 
+        // cancel button
         View.OnClickListener cancelListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddItemActivity.this, ViewListDetailActivity.class);
-                //TODO add currently selected list name as extra w/ key "SELECTED_LIST_NAME"
+                Bundle extras = new Bundle();
+                extras.putString(getString(R.string.from_activity_key), "AddItemActivityCancel");
+                extras.putString(getString(R.string.selected_list_key), listName);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         };
