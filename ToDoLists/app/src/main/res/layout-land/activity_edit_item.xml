@@ -91,13 +91,15 @@
             android:id="@+id/edit_item_delete_button"
             android:text="Delete Item"
             android:textColor="@color/red"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/edit_item_update_button"
             android:text="Update Item"
-            android:textColor="@color/green"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

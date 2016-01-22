@@ -27,6 +27,8 @@
     <Button
         android:id="@+id/add_list_button"
         android:text="Add List"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

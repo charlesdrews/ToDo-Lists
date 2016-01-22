@@ -34,12 +34,16 @@
         <Button
             android:id="@+id/edit_list_button"
             android:text="Edit List"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/add_item_button"
             android:text="Add Item to List"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
