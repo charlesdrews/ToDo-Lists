@@ -2,6 +2,12 @@ package com.charlesdrews.todolists;
 
 /**
  * Error messages and keys/values used in Intent Extras.
+ *
+ * I gather from the internet that people are divided over
+ * whether having a Constants class is bad practice. I used
+ * it on this project for convenience, but would be happy to
+ * adopt a better practice (enums?) if need be.
+ *
  * Created by charlie on 1/21/16.
  */
 public final class Constants {

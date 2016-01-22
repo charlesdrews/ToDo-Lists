@@ -15,6 +15,11 @@ public class EditListActivity extends AppCompatActivity {
     EditText mListNameInput;
     Button mCancel, mDelete, mUpdate;
 
+    /**
+     * Create/populate views for the Edit List activity.
+     * User can change list name or delete list.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

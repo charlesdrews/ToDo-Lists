@@ -4,5 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_title_font_size">30sp</dimen>
     <dimen name="activity_label_font_size">20sp</dimen>
-    <dimen name="activity_view_bottom_margin">30dp</dimen>
+    <dimen name="bottom_margin">30dp</dimen>
+    <dimen name="bottom_margin_land">10dp</dimen>
+    <dimen name="label_right_margin_land">10dp</dimen>
 </resources>

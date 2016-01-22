@@ -22,6 +22,13 @@ public class AddItemActivity extends AppCompatActivity {
     private Spinner mSpinner;
     private ArrayAdapter<String> mAdapter;
 
+    /**
+     * Create/populate views for the Add Item activity.
+     * User can specify title & detail, as well as
+     * select a different list - other that the one
+     * they just came from - if desired.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

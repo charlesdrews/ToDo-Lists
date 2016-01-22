@@ -23,6 +23,13 @@ public class ViewListDetailActivity extends AppCompatActivity {
     private ArrayList<String> mItemTitles;
     private String mListName;
 
+    /**
+     * Create/populate the views for the View List Detail activity.
+     * This shows the list of items present in a selected list.
+     * User can click an item to view/edit item detail, add item,
+     * or edit list.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +98,13 @@ public class ViewListDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Receives data from several other activities: AddItemActivity, EditItemActivity, EditListActivity.
+     * Switch/case determines which activity sent the data, then handles the data appropriately.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -136,6 +150,7 @@ public class ViewListDetailActivity extends AppCompatActivity {
                 case EDIT_LIST_DELETE:
                     break;
             }
+            //after editing or deleting data above in the switch/case, finally update the adapter
             mListName = list.getName();
             mTitle.setText(mListName);
             mItemTitles.clear();
@@ -144,6 +159,11 @@ public class ViewListDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrieves a ToDoList object with the specified name attribute.
+     * @param name
+     * @return
+     */
     public static ToDoList getListByName(String name) {
         for (ToDoList list : ViewListsActivity.mToDoLists) {
             if (list.getName().equals(name)) {

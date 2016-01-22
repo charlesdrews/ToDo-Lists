@@ -14,6 +14,10 @@ public class AddListActivity extends AppCompatActivity {
     private EditText mInput;
     private Button mCreateButton, mCancelButton;
 
+    /**
+     * Create/populate views for the Add List activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

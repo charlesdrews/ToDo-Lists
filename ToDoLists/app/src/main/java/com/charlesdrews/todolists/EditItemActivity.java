@@ -20,6 +20,12 @@ public class EditItemActivity extends AppCompatActivity {
     private Spinner mSpinner;
     private ArrayAdapter<String> mAdapter;
 
+    /**
+     * Create/populate views for the Edit Item activity
+     * User can change item title or detail, as well
+     * as move item to a different list, or delete item.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

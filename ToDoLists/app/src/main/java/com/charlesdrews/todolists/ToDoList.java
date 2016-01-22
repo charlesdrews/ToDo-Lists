@@ -24,10 +24,12 @@ public class ToDoList {
        this.name = name;
     }
 
+    //get actual ToDoItem objects
     public ArrayList<ToDoItem> getItems() {
         return items;
     }
 
+    //get just the title strings from the ToDoItem objects
     public ArrayList<String> getItemTitles() {
         ArrayList<String> itemTitles = new ArrayList<String>();
         for (ToDoItem item : this.getItems()) {

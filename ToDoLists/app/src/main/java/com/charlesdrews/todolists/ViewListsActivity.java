@@ -21,6 +21,11 @@ public class ViewListsActivity extends AppCompatActivity {
     private ArrayList<String> mListNames;
     public static final ArrayList<ToDoList> mToDoLists = new ArrayList<ToDoList>();
 
+    /**
+     * This is the "Home" activity - create/populate views for the View Lists activity.
+     * User can click a list to view list items in detail or can add a new list.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,8 @@ public class ViewListsActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.lists_list_view);
         mAddListButton = (Button) findViewById(R.id.add_list_button);
 
-        // check if extras included; without SELECTED_LIST nothing for this activity to do
+        // if we arrive here from the delete button in the EditList activity, need to delete
+        // the specified list.
         Bundle extrasReceived = getIntent().getExtras();
         if (extrasReceived != null && extrasReceived.getString(FROM_ACTIVITY).equals(EDIT_LIST_DELETE)) {
             String listToDeleteName = extrasReceived.getString(SELECTED_LIST);
@@ -64,6 +70,12 @@ public class ViewListsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Receives data from the Add List activity & adds new list to ArrayList & adapter.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -77,6 +89,10 @@ public class ViewListsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * In some cases this activity was showing previously deleted lists when user gets here
+     * via the back button. Solved this by refreshing the adapter upon resume.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -86,6 +102,10 @@ public class ViewListsActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Returns a collection of Strings representing the names of each list.
+     * @return ArrayList<String> containing the names of all the ToDoList objects.
+     */
     public static ArrayList<String> getListNames() {
         ArrayList<String> listNames = new ArrayList<String>();
         for (ToDoList list : mToDoLists) {
