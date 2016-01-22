@@ -30,20 +30,20 @@ This activity allows the user to enter a name for a new list, and create it by c
 ---
 
 **View List Detail Activity**  
-This activity shows a list of the item titles for the items contained by ToDo list the user clicked on. If the user clicks on an item title, they are sent to the Edit Item activity for that item. If the user clicks the "Add Item" button they are sent to the Add Item activity, and the "Edit List" sends them to the Edit List activity.  
+This activity shows a list of the item titles for the items contained by the ToDo list the user clicked on. If the user clicks on an item title, they are sent to the Edit Item activity for that item. If the user clicks the "Add Item" button they are sent to the Add Item activity, and the "Edit List" sends them to the Edit List activity. The user can use Android's back button to return to the View Lists activity (home screen).  
 <img src="screenshots/ViewListDetail.png" alt="ViewListDetailActivity" width="400">
 
 ---
 
 **Add Item Activity**  
-This activity allows a user to enter title and detail strings for a new item. The spinner is pre-selected with the list the user was viewing when the clicked the "Add Item" button, but the user can select a different list if they desire, and the new item will be created in whatever list is specified in the spinner. Furthermore, after clicking "Create" the user will be returned to the View List Detail activity for whichever list the new item was added to (not necessarily the list they had been viewing previously). If the user leaves the item title blank they are given an error saying it cannot be blank. If the user enters an item title already used in the specified list, they get a Toast notifying them they must pick a different name. The "Cancel" button sends the user back to the View List Detail actiity for the list they had been viewing, with no item added. There are two screenshots for this activity, as landscape mode required a modified layout in order for everything to fit on the screen.  
+This activity allows a user to enter title and detail strings for a new item. The spinner is pre-selected with the list the user was viewing when they clicked the "Add Item" button, but the user can select a different list if they desire, and the new item will be created in whatever list is specified in the spinner. Furthermore, after clicking "Create" the user will be returned to the View List Detail activity for whichever list the new item was added to (not necessarily the list they had been viewing previously). If the user leaves the item title blank they are given an error saying it cannot be blank. If the user enters an item title already used in the specified list, they get a Toast notifying them they must pick a different name. The "Cancel" button sends the user back to the View List Detail activity for the list they had been viewing, with no item added. There are two screenshots for this activity, as landscape mode required a modified layout in order for everything to fit on the screen.  
 <img src="screenshots/AddItem.png" alt="AddItemActivity" width="400">
 <img src="screenshots/AddItem-Land.png" alt="AddItemActivity - Landscape" height="400">
 
 ---
 
 **Edit Item Activity**  
-This activity allows the user to view an item's detail, as well as change the title or detail strings, or even move the item to a new list. The user can also delete the item entirely with the "Delete Item" button. If the user edits the item title to be blank, they receive an error message, and if they enter an item title already used in the list specified in the spinner, a Toast notifies them to pick a different title. Cancel returns to the View List Detail activity. This view also has two screenshots because it required a different layout for landscape mode to ensure all views fit on the screen.  
+This activity allows the user to view an item's detail, as well as change the title or detail strings, or even move the item to a different list. The user can also delete the item entirely with the "Delete Item" button. If the user edits the item title to be blank, they receive an error message, and if they enter an item title already used in the list specified in the spinner, a Toast notifies them to pick a different title. Cancel returns to the View List Detail activity. This view also has two screenshots because it required a different layout for landscape mode to ensure all views fit on the screen.  
 <img src="screenshots/EditItem.png" alt="EditItemActivity" width="400">
 <img src="screenshots/EditItem-Land.png" alt="EditItemActivity - Landscape" height="400">
 
