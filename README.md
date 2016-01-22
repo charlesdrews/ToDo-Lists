@@ -1,12 +1,13 @@
 # Charlie's ToDo List App
 
-This app allows the user to do the following:  
-*Create multiple todo lists  
-*View a list of all todo lists  
-*View each list in detail, showing the items that belong to that list  
-*Add items to each todo list  
-*Edit items - change title or detail strings, move item to a different list, or delete item  
-*Edit lists - change name or delete list  
+This app allows the user to do the following:
+
+* Create multiple todo lists
+* View a list of all todo lists
+* View each list in detail, showing the items that belong to that list
+* Add items to each todo list
+* Edit items - change title or detail strings, move item to a different list, or delete item
+* Edit lists - change name or delete list
 
 When the user creates or edits a list, they receive an error if they try to submit a blank list name. Similarly, if a user enters a list name that is already in use, they are notified that name cannot be used again.
 
