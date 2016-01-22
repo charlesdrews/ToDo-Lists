@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">ToDoLists</string>
-<!-- TODO remove these names below -->
-    <string name="from_activity_key">FROM_ACTIVITY</string>
-    <string name="selected_list_key">SELECTED_LIST_NAME</string>
-    <string name="selected_item_key">SELECTED_ITEM_NAME</string>
 </resources>

@@ -29,6 +29,14 @@ public class ViewListsActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.lists_list_view);
         mAddListButton = (Button) findViewById(R.id.add_list_button);
 
+        // check if extras included; without SELECTED_LIST nothing for this activity to do
+        Bundle extrasReceived = getIntent().getExtras();
+        if (extrasReceived != null && extrasReceived.getString(FROM_ACTIVITY).equals(EDIT_LIST_DELETE)) {
+            String listToDeleteName = extrasReceived.getString(SELECTED_LIST);
+            ToDoList listToDelete = ViewListDetailActivity.getListByName(listToDeleteName);
+            mToDoLists.remove(listToDelete);
+        }
+
         mListNames = getListNames();
         mAdapter = new ArrayAdapter<String>(ViewListsActivity.this,
                 android.R.layout.simple_list_item_1, mListNames);
@@ -49,7 +57,7 @@ public class ViewListsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ViewListsActivity.this, ViewListDetailActivity.class);
                 Bundle extras = new Bundle();
-                extras.putString(SELECTED_LIST, ((TextView)view).getText().toString()); // send name of list user clicked
+                extras.putString(SELECTED_LIST, ((TextView) view).getText().toString()); // send name of list user clicked
                 intent.putExtras(extras);
                 startActivity(intent);
             }
@@ -67,6 +75,15 @@ public class ViewListsActivity extends AppCompatActivity {
             mListNames.addAll(getListNames());
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mListNames.clear();
+        mListNames.addAll(getListNames());
+        mAdapter.notifyDataSetChanged();
     }
 
     public static ArrayList<String> getListNames() {

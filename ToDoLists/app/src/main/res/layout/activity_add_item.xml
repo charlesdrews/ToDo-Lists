@@ -25,14 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-<!--TODO replace this TextView with a Spinner -->
-    <TextView
-        android:id="@+id/add_item_list_name"
-        android:text="List Name"
-        android:textSize="@dimen/activity_label_font_size"
-        android:layout_gravity="center_horizontal"
+    <Spinner
+        android:id="@+id/add_item_spinner"
         android:layout_marginBottom="@dimen/activity_view_bottom_margin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView

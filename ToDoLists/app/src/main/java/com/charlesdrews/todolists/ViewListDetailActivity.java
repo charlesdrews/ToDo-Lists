@@ -18,7 +18,7 @@ public class ViewListDetailActivity extends AppCompatActivity {
 
     private TextView mTitle;
     private ListView mListView;
-    private Button mDeleteButton, mAddItemButton;
+    private Button mEditButton, mAddItemButton;
     private ArrayAdapter<String> mAdapter;
     private ArrayList<String> mItemTitles;
     private String mListName;
@@ -28,16 +28,16 @@ public class ViewListDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_list_detail);
 
-        mTitle = (TextView) findViewById(R.id.list_detail_title);
-        mListView = (ListView) findViewById(R.id.list_detail_list_view);
-        mDeleteButton = (Button) findViewById(R.id.delete_list_button);
-        mAddItemButton = (Button) findViewById(R.id.add_item_button);
-
         // check if extras included; without SELECTED_LIST nothing for this activity to do
         Bundle extrasReceived = getIntent().getExtras();
         if (extrasReceived == null) {
             finish();
         }
+
+        mTitle = (TextView) findViewById(R.id.list_detail_title);
+        mListView = (ListView) findViewById(R.id.list_detail_list_view);
+        mEditButton = (Button) findViewById(R.id.edit_list_button);
+        mAddItemButton = (Button) findViewById(R.id.add_item_button);
 
         // no matter which activity sent us here, the extras should specify the selected list
         // get name for selected list user wants to view and populate title
@@ -66,11 +66,15 @@ public class ViewListDetailActivity extends AppCompatActivity {
             }
         });
 
-        // delete list button
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+        // edit list button
+        mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO set listener for "delete list" button (may need "are you sure" popup)
+                Intent intent = new Intent(ViewListDetailActivity.this, EditListActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString(SELECTED_LIST, mListName);
+                intent.putExtras(extras);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -125,6 +129,11 @@ public class ViewListDetailActivity extends AppCompatActivity {
                         // add item to list specified by updatedListName (already referenced by "list")
                         list.addItem(new ToDoItem(updatedItemTitle, updatedItemDetail, updatedListName));
                     }
+                    break;
+                case EDIT_LIST_UPDATE:
+                    list.setName(data.getExtras().getString(NEW_LIST_NAME));
+                    break;
+                case EDIT_LIST_DELETE:
                     break;
             }
             mListName = list.getName();

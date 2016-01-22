@@ -20,6 +20,10 @@ public class ToDoList {
         return name;
     }
 
+    public void setName(String name) {
+       this.name = name;
+    }
+
     public ArrayList<ToDoItem> getItems() {
         return items;
     }
@@ -47,5 +51,11 @@ public class ToDoList {
 
     public void removeItem(ToDoItem item) {
         items.remove(item);
+    }
+
+    public void removeAllItems() {
+        for (ToDoItem item : this.items) {
+            this.removeItem(item);
+        }
     }
 }

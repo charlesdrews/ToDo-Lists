@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import static com.charlesdrews.todolists.Constants.*;
 
@@ -13,21 +15,15 @@ import java.util.ArrayList;
 
 public class EditItemActivity extends AppCompatActivity {
 
-    private EditText mListName; //TODO make this a spinner
     private EditText mItemTitle, mItemDetail;
     private Button mCancelButton, mDeleteButton, mUpdateButton;
+    private Spinner mSpinner;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
-
-        mListName = (EditText) findViewById(R.id.edit_item_list_name); //TODO make this a spinner
-        mItemTitle = (EditText) findViewById(R.id.edit_item_title);
-        mItemDetail = (EditText) findViewById(R.id.edit_item_detail);
-        mCancelButton = (Button) findViewById(R.id.edit_item_cancel_button);
-        mDeleteButton = (Button) findViewById(R.id.edit_item_delete_button);
-        mUpdateButton = (Button) findViewById(R.id.edit_item_update_button);
 
         // check if extras included; without SELECTED_ITEM nothing for this activity to do
         Bundle extrasReceived = getIntent().getExtras();
@@ -35,10 +31,23 @@ public class EditItemActivity extends AppCompatActivity {
             finish();
         }
 
+        mItemTitle = (EditText) findViewById(R.id.edit_item_title);
+        mItemDetail = (EditText) findViewById(R.id.edit_item_detail);
+        mCancelButton = (Button) findViewById(R.id.edit_item_cancel_button);
+        mDeleteButton = (Button) findViewById(R.id.edit_item_delete_button);
+        mUpdateButton = (Button) findViewById(R.id.edit_item_update_button);
+
+        mSpinner = (Spinner) findViewById(R.id.edit_item_spinner);
+        ArrayList<String> listNames = ViewListsActivity.getListNames();
+        mAdapter = new ArrayAdapter<String>(EditItemActivity.this,
+                android.R.layout.simple_spinner_item, listNames);
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(mAdapter);
+
         // get and display selected list name and selected item title
         final String originalListName = extrasReceived.getString(SELECTED_LIST);
         final String originalItemTitle = extrasReceived.getString(SELECTED_ITEM);
-        mListName.setText(originalListName);
+        mSpinner.setSelection(listNames.indexOf(originalListName));
         mItemTitle.setText(originalItemTitle);
 
         // also get item detail via the atual list and item objects
@@ -76,7 +85,7 @@ public class EditItemActivity extends AppCompatActivity {
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String updatedListName = mListName.getText().toString(); //TODO make this pull from a spinner
+                String updatedListName = mSpinner.getSelectedItem().toString();
                 String updatedItemTitle = mItemTitle.getText().toString();
                 String updatedItemDetail = mItemDetail.getText().toString();
 
@@ -86,7 +95,6 @@ public class EditItemActivity extends AppCompatActivity {
                     // if new title is OK with specified list
                     Intent intent = new Intent(EditItemActivity.this, ViewListDetailActivity.class);
                     Bundle extras = new Bundle();
-                    //TODO array or hashmap?
                     extras.putString(FROM_ACTIVITY, EDIT_ITEM_UPDATE);
                     extras.putString(ORIGINAL_LIST_NAME, originalListName);
                     extras.putString(ORIGINAL_ITEM_TITLE, originalItemTitle);
@@ -97,7 +105,7 @@ public class EditItemActivity extends AppCompatActivity {
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
-                    // if new title is not OK
+                    // if new title is not OK (i.e. is already present in the specified list)
                     Toast.makeText(
                             EditItemActivity.this,
                             "There is already an item in that list with that title. Please enter a new title.",

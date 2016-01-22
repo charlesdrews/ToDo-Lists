@@ -31,8 +31,8 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/delete_list_button"
-            android:text="Delete List"
+            android:id="@+id/edit_list_button"
+            android:text="Edit List"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

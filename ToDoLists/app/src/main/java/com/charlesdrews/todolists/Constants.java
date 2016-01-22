@@ -7,8 +7,9 @@ public final class Constants {
     //TODO delete any that aren't used at the end
 
     public static final String FROM_ACTIVITY = "FROM_ACTIVITY";
+    public static final String EDIT_LIST_UPDATE = "EDIT_LIST_UPDATE";
+    public static final String EDIT_LIST_DELETE = "EDIT_LIST_DELETE";
     public static final String ADD_ITEM_CREATE = "ADD_ITEM_CREATE";
-    public static final String ADD_ITEM_CANCEL = "ADD_ITEM_CANCEL";
     public static final String EDIT_ITEM_UPDATE = "EDIT_ITEM_UPDATE";
     public static final String EDIT_ITEM_DELETE = "EDIT_ITEM_DELETE";
 
