@@ -13,7 +13,7 @@ When the user creates or edits a list, they receive an error if they try to subm
 
 When the user creates or edits an item, they receive an error if they try to submit a blank item title. Similarly, if a user enters an item title that is already in use in the specified list, they are notified that item title cannot be used again in that list.
 
-The screenshots below demonstrate the app's user interface.
+The screenshots below demonstrate the app's user interface. Please see the "prototype" directory for photos of my original paper prototype.
 
 ---
 
