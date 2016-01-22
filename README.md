@@ -1,6 +1,6 @@
 # Charlie's ToDo List App
 
-This app allows the user to do the following:
+This app allows the user to do the following:  
 *Create multiple todo lists
 *View a list of all todo lists
 *View each list in detail, showing the items that belong to that list
