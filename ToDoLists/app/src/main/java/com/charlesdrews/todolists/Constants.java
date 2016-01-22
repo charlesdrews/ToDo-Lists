@@ -1,10 +1,14 @@
 package com.charlesdrews.todolists;
 
 /**
+ * Error messages and keys/values used in Intent Extras.
  * Created by charlie on 1/21/16.
  */
 public final class Constants {
-    //TODO delete any that aren't used at the end
+    public static final String BLANK_LIST_NAME_MSG = "List name cannot be blank";
+    public static final String BLANK_ITEM_TITLE_MSG = "Item title cannot be blank";
+    public static final String LIST_NAME_IN_USE_MSG = "There is already a list with that name. Please enter a different name.";
+    public static final String ITEM_TITLE_IN_USE_MSG = "There is already an item in this list with that title. Please enter a different title.";
 
     public static final String FROM_ACTIVITY = "FROM_ACTIVITY";
     public static final String EDIT_LIST_UPDATE = "EDIT_LIST_UPDATE";
@@ -25,9 +29,4 @@ public final class Constants {
 
     public static final String UPDATED_ITEM_TITLE = "UPDATED_ITEM_TITLE";
     public static final String UPDATED_ITEM_DETAIL = "UPDATED_ITEM_DETAIL";
-
-    public static final String BLANK_LIST_NAME_MSG = "List name cannot be blank";
-    public static final String BLANK_ITEM_TITLE_MSG = "Item title cannot be blank";
-    public static final String LIST_NAME_IN_USE_MSG = "There is already a list with that name. Please enter a different name.";
-    public static final String ITEM_TITLE_IN_USE_MSG = "There is already an item in this list with that title. Please enter a different title.";
 }
